@@ -3,25 +3,25 @@ void main() {
   demonstrateNumbers();
   demonstrateStrings();
   demonstrateBooleans();
+  demonstrateCollections();
+  demonstrateNullSafety();
 }
 
 void demonstrateNumbers() {
   print('\n--- Numbers (int, double, num) ---');
-  int studentsCount = 25; // ціле число
-  double averageScore = 88.5; // дробове число
-  num flexibleNumber = 10; // num може бути і int, і double
+  int studentsCount = 25;
+  double averageScore = 88.5;
+  num flexibleNumber = 10;
   flexibleNumber = 10.75;
 
-  // Математичні операції
   int totalPoints = studentsCount * 4;
   double division = totalPoints / 3;
-  int integerDivision = totalPoints ~/ 3; // ділення націло
-  int remainder = totalPoints % 3; // остача від ділення
+  int integerDivision = totalPoints ~/ 3;
+  int remainder = totalPoints % 3;
 
   print('Students: $studentsCount, Average: $averageScore, Flexible: $flexibleNumber');
   print('Total: $totalPoints, Div: ${division.toStringAsFixed(2)}, IntDiv: $integerDivision, Mod: $remainder');
 
-  // Перетворення типів (Type conversion)
   String numberText = '42';
   int parsedInt = int.parse(numberText);
   double convertedDouble = parsedInt.toDouble();
@@ -31,24 +31,21 @@ void demonstrateNumbers() {
 
 void demonstrateStrings() {
   print('\n--- Strings ---');
-  String firstName = 'Olena';
+  String firstName = 'Yevhen';
   String lastName = 'Samoilenko';
 
-  // Інтерполяція (вставка змінних у текст через $)
   String fullName = '$firstName $lastName';
   print('Full name: $fullName (length: ${fullName.length})');
 
-  // Багаторядковий текст (Multi-line strings) та escape-послідовності
   String multiLine = '''
 University: KPI
 Faculty: Informatics
 Quote: "Dart is awesome!\nLet's code."''';
   print(multiLine);
 
-  // Методи роботи з рядками
   print('Uppercase: ${fullName.toUpperCase()}');
-  print('Contains "Olena": ${fullName.contains('Olena')}');
-  print('Replaced: ${fullName.replaceAll('Olena', 'Student Olena')}');
+  print('Contains "Yevhen": ${fullName.contains('Yevhen')}');
+  print('Replaced: ${fullName.replaceAll('Yevhen', 'Student Yevhen')}');
 }
 
 void demonstrateBooleans() {
@@ -57,11 +54,57 @@ void demonstrateBooleans() {
   bool isPassed = score >= 60;
   bool hasBonus = true;
 
-  // Логічні оператори (&& - І, || - АБО, ! - НЕ)
   bool getsScholarship = isPassed && hasBonus && (score > 80);
   print('Passed: $isPassed, Scholarship: $getsScholarship');
 
-  // Тернарний оператор (умовний вираз: умова ? якщо_так : якщо_ні)
   String status = isPassed ? 'Екзамен складено' : 'Перездача';
   print('Status: $status');
+}
+
+void demonstrateCollections() {
+  print('\n--- Collections (List, Set, Map) ---');
+  // List — список по порядку (можуть бути дублікати)
+  List<String> subjects = ['Math', 'Dart', 'Databases'];
+  subjects.add('Algorithms');
+  print('List: $subjects, first: ${subjects.first}');
+
+  // Set — множина тільки унікальних значень
+  Set<int> uniqueCodes = {101, 102, 101, 103}; // дублікат 101 ігнорується
+  uniqueCodes.add(104);
+  print('Set (unique): $uniqueCodes');
+
+  // Map — словник "ключ: значення"
+  Map<String, int> studentGrades = {
+    'Math': 90,
+    'Dart': 98,
+  };
+  studentGrades['Databases'] = 85;
+  print('Map: $studentGrades, Dart grade: ${studentGrades['Dart']}');
+}
+
+void demonstrateNullSafety() {
+  print('\n--- Null Safety ---');
+  // Знак ? дозволяє змінній бути порожньою (null)
+  String? middleName;
+  // Оператор ?? підставляє запасне значення, якщо зліва null
+  print('Middle name: ${middleName ?? 'Не вказано'}');
+
+  // Оператор ??= записує значення тільки якщо змінна зараз null
+  middleName ??= 'Олександрович';
+  print('After ??=: $middleName');
+
+  // Оператор ?. безпечно викликає метод без помилки, якщо там null
+  String? nullableText;
+  print('Safe length: ${nullableText?.length}');
+
+  // late — обіцяємо заповнити змінну пізніше, перед використанням
+  late String universityName;
+  universityName = 'National Technical University';
+  print('Late variable: $universityName');
+
+  printGreeting(name: 'Yevhen');
+}
+
+void printGreeting({required String name, String? title}) {
+  print('Hello, ${title ?? ''} $name!'.trim());
 }
