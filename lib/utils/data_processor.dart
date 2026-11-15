@@ -1,8 +1,9 @@
 import '../models/student.dart';
 import '../models/university.dart';
 
+typedef JsonMap = Map<String, dynamic>;
+
 class DataProcessor {
-  // Робота з Lists
   static List<int> filterEvenNumbers(List<int> numbers) {
     return numbers.where((n) => n % 2 == 0).toList();
   }
@@ -21,12 +22,12 @@ class DataProcessor {
     return counts;
   }
 
-  static List> sortStudentsByGPA(List<Student> students) {
+  static List<JsonMap> sortStudentsByGPA(List<Student> students) {
     final sorted = List<Student>.from(students)
       ..sort((a, b) => b.gpa.compareTo(a.gpa));
 
     return sorted
-        .map((s) => {
+        .map((s) => <String, dynamic>{
               'id': s.id,
               'name': s.fullName,
               'gpa': double.parse(s.gpa.toStringAsFixed(2)),
@@ -34,7 +35,6 @@ class DataProcessor {
         .toList();
   }
 
-  // Робота з Sets
   static Set<String> getUniqueCourses(List<Student> students) {
     final Set<String> allCourses = {};
     for (var student in students) {
@@ -52,7 +52,6 @@ class DataProcessor {
     return common;
   }
 
-  // Робота з Maps
   static Map<int, List<Student>> groupStudentsByBirthYear(
       List<Student> students) {
     final Map<int, List<Student>> grouped = {};
@@ -73,14 +72,15 @@ class DataProcessor {
       });
     }
 
-    return courseGrades.map((courseId, gradesList) {
+    final Map<String, double> averages = {};
+    courseGrades.forEach((courseId, gradesList) {
       double avg = gradesList.reduce((a, b) => a + b) / gradesList.length;
-      return MapEntry(courseId, double.parse(avg.toStringAsFixed(2)));
+      averages[courseId] = double.parse(avg.toStringAsFixed(2));
     });
+    return averages;
   }
 
-  // Комплексний звіт по університету
-  static List> generateReport(University university) {
+  static List<JsonMap> generateReport(University university) {
     return university.courses.map((course) {
       final enrolled = university.getStudentsByCourse(course.id);
       double avgCourseGrade = 0.0;
@@ -93,7 +93,7 @@ class DataProcessor {
         avgCourseGrade = grades.reduce((a, b) => a + b) / grades.length;
       }
 
-      return {
+      return <String, dynamic>{
         'courseId': course.id,
         'courseName': course.name,
         'enrolledCount': enrolled.length,
