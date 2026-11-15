@@ -17,16 +17,19 @@
 - `test/` — модульні тести (`dart test`).
 
 ## Як запустити проєкт
-```bash
-# Встановити залежності
-dart pub get
 
-# Запустити кожне завдання окремо
-dart run bin/task1_variables.dart
-dart run bin/task2_functions.dart
-dart run bin/task3_classes.dart
-dart run bin/task4_collections.dart
-dart run bin/task5_async.dart
+    dart pub get
+    dart run bin/task1_variables.dart
+    dart run bin/task2_functions.dart
+    dart run bin/task3_classes.dart
+    dart run bin/task4_collections.dart
+    dart run bin/task5_async.dart
+    dart test
 
-# Запустити unit-тести
-dart test
+## Декларація про використання ШІ (AI Disclosure)
+Під час виконання практичної роботи інструменти штучного інтелекту (**Gemini**) використовувалися як допоміжний асистент для:
+- генерації шаблонів коду та прикладів реалізації методів (обробка колекцій, серіалізація JSON, потоки `Stream`);
+- діагностики та виправлення синтаксичних помилок і типізації під час розробки;
+- написання модульних тестів (`package:test`) та структурування документації `README.md`.
+
+Весь згенерований код був перевірений, протестований локально та адаптований відповідно до вимог завдання.
