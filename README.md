@@ -1,2 +1,32 @@
-A sample command-line application with an entrypoint in `bin/`, library code
-in `lib/`, and example unit test in `test/`.
+# Dart Basics — Практична робота
+
+**Студент:** Самойленко Євген  
+**Репозиторій:** `dart-basics-samoilenko`
+
+## Опис проєкту
+Консольний застосунок на мові програмування Dart, що демонструє роботу з базовим синтаксисом, функціями вищого порядку, об'єктно-орієнтованим програмуванням, колекціями та асинхронними потоками.
+
+## Структура проєкту
+- `bin/task1_variables.dart` — змінні, типи даних, оператори, колекції (`List`, `Set`, `Map`) та Null Safety (`?`, `??`, `??=`, `?.`, `late`).
+- `bin/task2_functions.dart` — функції, рекурсія (Фібоначчі, факторіал), замикання, калькулятор і текстовий аналізатор.
+- `bin/task3_classes.dart` — ООП система управління університетом (`Person`, `Student`, `Professor`, `Course`, `University`).
+- `bin/task4_collections.dart` — функціональна обробка колекцій (`map`, `where`, `fold`, `reduce`) та аналіз даних студентів з CSV.
+- `bin/task5_async.dart` — асинхронне програмування (`Future`, `async/await`, `Future.wait`, `Stream`, JSON File I/O).
+- `lib/models/` — моделі даних університету з підтримкою серіалізації JSON.
+- `lib/utils/` — утилітарні класи `Calculator` та `DataProcessor`.
+- `test/` — модульні тести (`dart test`).
+
+## Як запустити проєкт
+```bash
+# Встановити залежності
+dart pub get
+
+# Запустити кожне завдання окремо
+dart run bin/task1_variables.dart
+dart run bin/task2_functions.dart
+dart run bin/task3_classes.dart
+dart run bin/task4_collections.dart
+dart run bin/task5_async.dart
+
+# Запустити unit-тести
+dart test
